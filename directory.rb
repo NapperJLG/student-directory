@@ -14,7 +14,12 @@ def input_students
     hobby = gets.chomp
     # add the student hash to the array
     students << {name: name, dob: dob, hobby: hobby, cohort: :november}
-    puts "Now we have #{students.count} students"
+    
+    if students.count == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
     puts "Enter another student or press return again to finish:"
     name = gets.chomp
