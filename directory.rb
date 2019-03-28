@@ -1,5 +1,39 @@
+@students = []
+
+def print_menu
+  puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+end
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "I don't know what you mean, try again"
+  end
+end
+
 def interactive_menu
-  students = []
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
+
+def interactive_menu
+  
   loop do
     puts "1. Input the students"
     puts "2. Show the students"
@@ -8,11 +42,11 @@ def interactive_menu
     
     case selection
     when "1"
-      students = input_students
+      @students = input_students
     when "2"
       print_header
-      print(students)
-      print_footer(students)
+      print
+      print_footer
     when "9"
       exit
     else
@@ -25,8 +59,6 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # create and empty array
-  students = []
   #get the first name
   name = gets.chomp
   
@@ -37,19 +69,19 @@ def input_students
     puts "Enter the students favourite hobby:"
     hobby = gets.chomp
     # add the student hash to the array
-    students << {name: name, dob: dob, hobby: hobby, cohort: :november}
+    @students << {name: name, dob: dob, hobby: hobby, cohort: :november}
     
-    if students.count == 1
-      puts "Now we have #{students.count} student"
+    if @students.count == 1
+      puts "Now we have #{@students.count} student"
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{@students.count} students"
     end
     # get another name from the user
     puts "Enter another student or press return again to finish:"
     name = gets.chomp
   end
 #returns the array of students
-students
+@students
 end
 
 def print_header
@@ -57,15 +89,15 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
-  students.each.with_index(1) do |student, index|
+def print_students_list
+  @students.each.with_index(1) do |student, index|
     puts "#{index}: #{student[:name]}, #{student[:dob]}, hobby: #{student[:hobby]} (#{student[:cohort]} cohort)" 
      
   end
 end
 
-def print_footer(students)
-puts "Overall, we have #{students.count} great students "
+def print_footer
+puts "Overall, we have #{@students.count} great students "
 end
 # Nothing happens until we call the methods
 
